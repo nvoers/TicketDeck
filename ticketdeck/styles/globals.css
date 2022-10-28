@@ -1,21 +1,10 @@
-@import "variables.css";
+:root{
+  --primary-color: #ABDAFC;
+  --secondary-color: #19647e;
+  --accent-color: #ffc857;
+}
 
 body{
   margin: 0;
   font-family: 'Roboto', sans-serif;
-}
-
-li{
-  display: inline;
-  color: white;
-  margin: 20px;
-}
-
-ul{
-  list-style-type: none;
-  overflow: hidden;
-  height: fit-content;
-  background-color: var(--primary-color);
-  padding: 30px;
-  margin: 0;
 }

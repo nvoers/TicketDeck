@@ -1,0 +1,18 @@
+.card{
+    margin-top: 25px;
+    border: 0px !important;
+    background-color: var(--light-gray) !important;
+}
+
+.header{
+    color: var(--secondary-color) !important;
+    text-align: center;
+    border: 0px !important;
+    background-color: var(--light-gray) !important;
+}
+
+.header h1{
+    font-weight: bold;
+    margin: auto;
+    vertical-align: middle;
+}
