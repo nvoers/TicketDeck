@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Navigation from './navigation.js'
 import Tickets from './tickets.js'
-import Calendar from './calendar.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home() {
@@ -18,9 +17,6 @@ export default function Home() {
         <div className='row'>
           <div className='col'>
             <Tickets />
-          </div>
-          <div className='col'>
-            <Calendar />
           </div>
         </div>
       </div>

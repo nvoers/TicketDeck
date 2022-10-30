@@ -7,10 +7,10 @@ export default function Navigation() {
     return(
         
             <Navbar expand="lg" className={styles.navbar}>
-                <div className='container'>
+                <div className="container">
                 <Navbar.Brand href="#home">TicketDeck</Navbar.Brand>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <Nav>
                         <Nav.Link href="#tickets">My tickets</Nav.Link>
                         <Nav.Link href="#link">My profile</Nav.Link>
                         <Nav.Link href="#logout">Logout</Nav.Link>

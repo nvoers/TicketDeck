@@ -6,12 +6,12 @@
 
 .header{
     color: var(--secondary-color) !important;
-    text-align: center;
     border: 0px !important;
     background-color: var(--light-gray) !important;
 }
 
 .header h1{
+    font-size: 4em;
     font-weight: bold;
     margin: auto;
     vertical-align: middle;
