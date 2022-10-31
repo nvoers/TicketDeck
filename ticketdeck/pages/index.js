@@ -1,9 +1,22 @@
 import Head from 'next/head'
-import Navigation from './navigation.js'
-import Tickets from './tickets.js'
+import Navigation from '../components/navigation.js'
+import Tickets from '../components/tickets.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { PrismaClient, Ticket, Prisma } from '@prisma/client';
 
-export default function Home() {
+const prisma = new PrismaClient();
+
+export async function getServerSideProps(context) {
+  const tickets = await prisma.ticket.findMany();
+  
+  return {
+      props: {
+          initialTickets: tickets
+      }
+  };
+}
+
+export default function Home({ initialTickets }) {
   return (
     <div>
       <Head>
@@ -16,7 +29,7 @@ export default function Home() {
       <div className='container'>
         <div className='row'>
           <div className='col'>
-            <Tickets />
+            <Tickets initialTickets={initialTickets}/>
           </div>
         </div>
       </div>
