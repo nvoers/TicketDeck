@@ -8,10 +8,10 @@ export default function Navigation() {
         
             <Navbar expand="lg" className={styles.navbar}>
                 <div className="container">
-                <Navbar.Brand href="#home">TicketDeck</Navbar.Brand>
+                <Navbar.Brand href="\">TicketDeck</Navbar.Brand>
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav>
-                        <Nav.Link href="#tickets">My tickets</Nav.Link>
+                        <Nav.Link href="\">My tickets</Nav.Link>
                         <Nav.Link href="#link">My profile</Nav.Link>
                         <Nav.Link href="#logout">Logout</Nav.Link>
                     </Nav>

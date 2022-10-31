@@ -14,3 +14,14 @@
     margin: auto;
     vertical-align: middle;
 }
+
+.qr{
+    margin-top: 25px;
+}
+
+.col4{
+    flex: 0 0 auto;
+    width: 33.333333%;
+    display: flex;
+    justify-content: center;
+}
