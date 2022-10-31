@@ -8,3 +8,15 @@ body{
   margin: 0;
   font-family: 'Roboto', sans-serif;
 }
+
+.card{
+  border: none !important;
+}
+
+.card-header{
+  border: none !important;
+}
+
+.card-body{
+  border: none !important;
+}

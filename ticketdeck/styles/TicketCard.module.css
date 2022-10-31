@@ -1,0 +1,26 @@
+.ticket{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.ticket:hover{
+    color: var(--accent-color);
+}
+
+.cover{
+    width: 20% !important;
+    height: 150px;
+    background-color: var(--accent-color);
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
+.link{
+    text-decoration: none;
+    color: var(--black);
+}

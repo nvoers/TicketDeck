@@ -1,6 +1,6 @@
 import styles from '../styles/Cards.module.css'
 import Card from 'react-bootstrap/Card'
-import React, { useState } from 'react'
+import TicketCard from './ticketcard.js'
 
 
 export default function Tickets({ initialTickets }) {
@@ -12,7 +12,7 @@ export default function Tickets({ initialTickets }) {
             </Card.Header>
             <Card.Body>
                 {initialTickets.map((ticket) => (
-                    <p>{ticket.event}</p>
+                    <TicketCard ticket={ticket}/>
                 ))}
             </Card.Body>
         </Card>
