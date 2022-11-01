@@ -10,7 +10,7 @@ export default function Tickets({ initialTickets }) {
         <Card className={styles.card}>
             <Card.Header className={styles.header}>
                 <h1>My Tickets</h1>
-                <Link href="\ticket\add" className={styles.link}>Add ticket +</Link>
+                <Link href="/ticket/add" className={styles.link}>Add ticket +</Link>
             </Card.Header>
             <Card.Body>
                 {initialTickets.map((ticket) => (
