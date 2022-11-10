@@ -12,22 +12,26 @@ async function saveTicket(ticket) {
     venue: ticket.venue,
   };
   let ticketData = {
-    eventId: 'cl9x7x09y0000ozperl5u2qxt',
+    event: {
+      create: eventData,
+    },
     code: ticket.code,
-    userId: 'cl9wt7f940000ve6ns41kimi2'
+    user: {
+      connect: {id: 'cl9wt7f940000ve6ns41kimi2'}
+    }
   };
-  const eventResponse = await fetch('/api/event', {
-    method: 'POST',
-    body: JSON.stringify(eventData),
-  });
+  // const eventResponse = await fetch('/api/event', {
+  //   method: 'POST',
+  //   body: JSON.stringify(eventData),
+  // });
   const ticketResponse = await fetch('/api/ticket', {
     method: 'POST',
     body: JSON.stringify(ticketData),
   });
 
-  if (!eventResponse.ok) {
-    throw new Error(eventResponse.statusText);
-  }
+  // if (!eventResponse.ok) {
+  //   throw new Error(eventResponse.statusText);
+  // }
   if (!ticketResponse.ok) {
     throw new Error(ticketResponse.statusText);
   }
