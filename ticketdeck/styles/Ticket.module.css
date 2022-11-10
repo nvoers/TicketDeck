@@ -1,6 +1,7 @@
 .card{
     margin-top: 25px;
     background-color: var(--light-gray) !important;
+    min-height: 300px;
 }
 
 .header{
@@ -16,7 +17,7 @@
 }
 
 .qr{
-    margin-top: 25px;
+    margin-top: 25px !important;
 }
 
 .col4{
@@ -24,4 +25,14 @@
     width: 33.333333%;
     display: flex;
     justify-content: center;
+    padding-top: 25px;
+}
+
+.delbtn {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 30px;
 }

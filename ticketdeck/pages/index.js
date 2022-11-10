@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../components/navigation.js'
 import Tickets from '../components/tickets.js'
 import { PrismaClient} from '@prisma/client';
+import { DateTime } from 'Luxon';
 
 const prisma = new PrismaClient();
 
@@ -18,9 +19,13 @@ export async function getServerSideProps() {
     return ticket;
   });
   
+  const sortedTickets = tickets.sort((a, b) => {
+    return Date.parse(b.event.date) - Date.parse(a.event.date);
+  });
+  
   return {
       props: {
-          initialTickets: tickets
+          initialTickets: sortedTickets
       }
   };
 }

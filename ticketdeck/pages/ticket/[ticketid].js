@@ -47,7 +47,7 @@ export default function Ticket({ticket}) {
               </Card.Header>
               <Card.Body>
                 <h3>{date.toDateString()}</h3>
-                <h3>{ticket.event.venue}, {ticket.event.city}</h3> 
+                <h3>{ticket.event.venue}, {ticket.event.city}</h3>
               </Card.Body>
             </Card>
             </div>
