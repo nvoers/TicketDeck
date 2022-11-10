@@ -1,8 +1,10 @@
 import Navigation from '../../components/navigation.js';
 import Head from 'next/head';
-import styles from '../../styles/Cards.module.css';
+import cardstyles from '../../styles/Cards.module.css';
+import formstyles from '../../styles/Forms.module.css';
 import Card from 'react-bootstrap/Card';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 async function saveTicket(ticket) {
   let eventData = {
@@ -41,8 +43,10 @@ async function saveTicket(ticket) {
 export default function addticket(){
 
   const { register, handleSubmit, errors } = useForm();
+  let router = new useRouter();
   async function onSubmit(data, e){
     saveTicket(data);
+    router.push('/');
   }
 
     return (
@@ -56,23 +60,23 @@ export default function addticket(){
           <Navigation />
           <div className='container'>
             <div className='row'>
-                <Card className={styles.card}>
-                    <Card.Header className={styles.header}>
+                <Card className={cardstyles.card}>
+                    <Card.Header className={cardstyles.header}>
                         <h1>Add ticket</h1>
                     </Card.Header>
                     <Card.Body>
-                    <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-                        <label>event</label>
-                        <input type="text" name="event" {...register("event")}/>
-                        <label>date</label>
-                        <input type="date" name="date" {...register("date")}/>
-                        <label>city</label>
-                        <input type="text" name="city" {...register("city")}/>
-                        <label>venue</label>
-                        <input type="text" name="venue" {...register("venue")}/>
-                        <label>code</label>
-                        <input type="text" name="code" {...register("code")}/>
-                        <input type="submit" value="Submit"/>
+                    <form className={formstyles.form} onSubmit={handleSubmit(onSubmit)}>
+                        <label>Event</label>
+                        <input type="text" name="event" {...register("event")} className={formstyles.large}/>
+                        <label>Date</label>
+                        <input type="date" name="date" {...register("date")} className={formstyles.fitted}/>
+                        <label>City</label>
+                        <input type="text" name="city" {...register("city")} className={formstyles.small}/>
+                        <label>Venue</label>
+                        <input type="text" name="venue" {...register("venue")} className={formstyles.small}/>
+                        <label>Code</label>
+                        <input type="text" name="code" {...register("code")} className={formstyles.small}/>
+                        <input type="submit" value="Submit" className={formstyles.submit}/>
                     </form>
                     </Card.Body>
                 </Card>
