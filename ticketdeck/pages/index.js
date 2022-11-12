@@ -43,35 +43,6 @@ export const getServerSideProps = async (context) => {
   };
 }
 
-// export async function getServerSideProps () {
-//   //GET request
-//   const headers = req.headers
-//   let tickets = await fetch('http://localhost:3000/api/getticket', {headers});
-//   tickets = JSON.parse(JSON.stringify(tickets));
-
-//   let events = await prisma.event.findMany();
-//   events = JSON.parse(JSON.stringify(events));
-
-//   const sortedTickets = [];
-
-//   if(tickets.length > 0){
-//     tickets = tickets.map((ticket) => {
-//       ticket.event = events.find((event) => event.id == ticket.eventId);
-//       return ticket;
-//     });
-
-//     const sortedTickets = tickets.sort((a, b) => {
-//       return Date.parse(b.event.date) - Date.parse(a.event.date);
-//     });
-//   }
-
-//   return {
-//       props: {
-//           initialTickets: sortedTickets
-//       }
-//   };
-// }
-
 export default function Home({initialTickets}) {
 
   const { data: session, status } = useSession();

@@ -6,6 +6,8 @@ import styles from '../../styles/Ticket.module.css'
 import Card from 'react-bootstrap/Card'
 import { PrismaClient} from '@prisma/client';
 import { useQRCode } from 'next-qrcode';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 const prisma = new PrismaClient();
 
@@ -25,9 +27,19 @@ export async function getServerSideProps(context) {
   };
 }
 
+const deleteTicket = async (ticketid, router) => {
+  const response = await fetch(`http://localhost:3000/api/tickets/${ticketid}`, {
+    method: 'DELETE'
+  })
+  console.log(response)
+  const data = await response.json()
+  router.push('/')
+}
+
 export default function Ticket({ticket}) {
   let date = new Date(ticket.event.date);
   const { Canvas } = useQRCode();
+  const router = new useRouter();
 
   return (
     <div>
@@ -48,6 +60,9 @@ export default function Ticket({ticket}) {
               <Card.Body>
                 <h3>{date.toDateString()}</h3>
                 <h3>{ticket.event.venue}, {ticket.event.city}</h3>
+                <button className={styles.delbtn} onClick={() => deleteTicket(ticket.id, router)}>
+                  <FontAwesomeIcon icon={faTrashCan} width="25" color="var(--secondary-color)" className='mt-3'/>
+                </button>
               </Card.Body>
             </Card>
             </div>

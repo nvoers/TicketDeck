@@ -16,7 +16,7 @@ export default function Navigation() {
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav>
                         <Nav.Link href="\">My tickets</Nav.Link>
-                        <Nav.Link href="#link">My profile</Nav.Link>
+                        {/* <Nav.Link href="#link">My profile</Nav.Link> */}
                         <Nav.Link href="/api/auth/signout">Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

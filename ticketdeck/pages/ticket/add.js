@@ -21,18 +21,12 @@ async function saveTicket(ticket, userid) {
     code: ticket.code,
     userId: userid
   };
-  // const eventResponse = await fetch('/api/event', {
-  //   method: 'POST',
-  //   body: JSON.stringify(eventData),
-  // });
+
   const ticketResponse = await fetch('/api/ticket', {
     method: 'POST',
     body: JSON.stringify(ticketData),
   });
 
-  // if (!eventResponse.ok) {
-  //   throw new Error(eventResponse.statusText);
-  // }
   if (!ticketResponse.ok) {
     throw new Error(ticketResponse.statusText);
   }

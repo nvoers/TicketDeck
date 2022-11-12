@@ -14,7 +14,7 @@ export default function Tickets({ initialTickets }) {
             </Card.Header>
             {console.log("Page", initialTickets)}
             <Card.Body>
-                {initialTickets 
+                {initialTickets.length > 0
                     ? initialTickets.map((ticket) => (
                         <TicketCard ticket={ticket}/>
                     )) 
