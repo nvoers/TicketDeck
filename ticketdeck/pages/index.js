@@ -2,29 +2,40 @@ import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../components/navigation.js'
 import Tickets from '../components/tickets.js'
-import { PrismaClient} from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css'
 
 const prisma = new PrismaClient();
 
-export async function getServerSideProps() {
-  let tickets = await prisma.ticket.findMany();
-  tickets = JSON.parse(JSON.stringify(tickets));
+export const getServerSideProps = async (context) => {
+  let tickets_request = await fetch('http://localhost:3000/api/getticket', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      cookie: context.req.headers.cookie,
+    },
+  })
+
+  let tickets = await tickets_request.json();
+  tickets = JSON.parse(JSON.stringify(tickets))
 
   let events = await prisma.event.findMany();
   events = JSON.parse(JSON.stringify(events));
-  
-  tickets = tickets.map((ticket) => {
-    ticket.event = events.find((event) => event.id == ticket.eventId);
-    return ticket;
-  });
-  
-  const sortedTickets = tickets.sort((a, b) => {
-    return Date.parse(b.event.date) - Date.parse(a.event.date);
-  });
-  
+
+  let sortedTickets = [];
+
+  if(tickets.length > 0){
+    tickets = tickets.map((ticket) => {
+      ticket.event = events.find((event) => event.id == ticket.eventId);
+      return ticket;
+    });
+    sortedTickets = tickets.sort((a, b) => {
+      return Date.parse(b.event.date) - Date.parse(a.event.date);
+    });
+  }
+
   return {
       props: {
           initialTickets: sortedTickets
@@ -32,7 +43,36 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Home({ initialTickets }) {
+// export async function getServerSideProps () {
+//   //GET request
+//   const headers = req.headers
+//   let tickets = await fetch('http://localhost:3000/api/getticket', {headers});
+//   tickets = JSON.parse(JSON.stringify(tickets));
+
+//   let events = await prisma.event.findMany();
+//   events = JSON.parse(JSON.stringify(events));
+
+//   const sortedTickets = [];
+
+//   if(tickets.length > 0){
+//     tickets = tickets.map((ticket) => {
+//       ticket.event = events.find((event) => event.id == ticket.eventId);
+//       return ticket;
+//     });
+
+//     const sortedTickets = tickets.sort((a, b) => {
+//       return Date.parse(b.event.date) - Date.parse(a.event.date);
+//     });
+//   }
+
+//   return {
+//       props: {
+//           initialTickets: sortedTickets
+//       }
+//   };
+// }
+
+export default function Home({initialTickets}) {
 
   const { data: session, status } = useSession();
 
@@ -49,7 +89,7 @@ export default function Home({ initialTickets }) {
         <div className='container'>
           <div className='row'>
             <div className='col'>
-              <Tickets initialTickets={initialTickets}/>
+              <Tickets initialTickets={initialTickets} />
             </div>
           </div>
         </div>
@@ -71,7 +111,7 @@ export default function Home({ initialTickets }) {
             <div className={styles.col}>
               <h1 className={styles.title}>Welcome to TicketDeck!</h1>
               <div className={styles.button}>
-                <a href="/login">Login</a>
+                <a href="/api/auth/signin">Login</a>
               </div>
             </div>
           </div>

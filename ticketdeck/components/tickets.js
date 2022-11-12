@@ -12,10 +12,14 @@ export default function Tickets({ initialTickets }) {
                 <h1>My Tickets</h1>
                 <Link href="/ticket/add" className={styles.link}>Add ticket +</Link>
             </Card.Header>
+            {console.log("Page", initialTickets)}
             <Card.Body>
-                {initialTickets.map((ticket) => (
-                    <TicketCard ticket={ticket}/>
-                ))}
+                {initialTickets 
+                    ? initialTickets.map((ticket) => (
+                        <TicketCard ticket={ticket}/>
+                    )) 
+                    : <p>You have no tickets yet</p>
+                }
             </Card.Body>
         </Card>
     );

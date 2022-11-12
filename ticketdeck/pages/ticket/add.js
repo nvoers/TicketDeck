@@ -5,8 +5,9 @@ import formstyles from '../../styles/Forms.module.css';
 import Card from 'react-bootstrap/Card';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { useSession, signIn, signOut } from "next-auth/react";
 
-async function saveTicket(ticket) {
+async function saveTicket(ticket, userid) {
   let eventData = {
     event: ticket.event,
     date: new Date(ticket.date),
@@ -18,9 +19,7 @@ async function saveTicket(ticket) {
       create: eventData,
     },
     code: ticket.code,
-    user: {
-      connect: {id: 'cl9wt7f940000ve6ns41kimi2'}
-    }
+    userId: userid
   };
   // const eventResponse = await fetch('/api/event', {
   //   method: 'POST',
@@ -44,13 +43,17 @@ export default function addticket(){
 
   const { register, handleSubmit, errors } = useForm();
   let router = new useRouter();
+  let session = new useSession();
+  
   async function onSubmit(data, e){
-    saveTicket(data);
+    saveTicket(data, session.data.user.id);
     router.push('/');
   }
 
     return (
         <div>
+          {console.log("data")}
+          {console.log(session.data.user.id)}
           <Head>
             <title>TicketDeck</title>
             <meta name="description" content="Store all of your tickets" />
