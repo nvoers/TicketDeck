@@ -10,11 +10,6 @@ datasource db {
   url      = "file:dev/db"
 }
 
-model user {
-  id String @id @default(cuid())
-  name String
-}
-
 model ticket{
   id String @id @default(cuid())
   userId Int
