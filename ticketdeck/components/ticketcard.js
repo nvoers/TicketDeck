@@ -9,10 +9,13 @@ export default function TicketCard({ticket}){
     return (
         <Link href={link} className={styles.link}>
         <div className={styles.ticket}>
-            <div className={styles.cover}></div>
+            <div className={styles.date}>
+                <h1>{date.toLocaleString('default', { weekday: 'long' }).substring(0,3)}</h1>
+                <h2>{date.getDate()} {date.toLocaleString('default', { month: 'short' })}</h2>
+            </div>
             <div className={styles.info}>
                 <h2 className={styles.infotext}>{ticket.event.event}</h2>
-                <p className={styles.infotext}>{date.toDateString()}, {ticket.event.venue}, {ticket.event.city}</p>
+                <p className={styles.infotext}>{ticket.event.venue}, {ticket.event.city}</p>
             </div>
         </div>
         </Link>
