@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from '../components/navigation.js'
 import Tickets from '../components/tickets.js'
 import { PrismaClient } from '@prisma/client';
@@ -77,13 +76,25 @@ export default function Home({initialTickets}) {
         </Head>
   
         <Navigation />
-        <div className='container'>
+        {/* <div className='container mx-auto'>
           <div className='row'>
             <div className={styles.col}>
               <h1 className={styles.title}>Welcome to TicketDeck!</h1>
               <div className={styles.button}>
                 <a href="/api/auth/signin">Login</a>
               </div>
+            </div>
+          </div>
+        </div> */}
+        <div className='bg-ticketdeck-blue align-middle'>
+          <div className='container mx-auto'>
+            <div className='row'>
+              <h1 className='text-4xl font-bold text-white text-center pt-40 pb-10'>Welcome to TicketDeck</h1>
+            </div>
+            <div className='row flex justify-center pb-40'>
+              <button className='text-xl rounded-full bg-white text-ticketdeck-blue font-bold px-4 py-2'>
+                <a href="/api/auth/signin">Login</a>
+              </button>
             </div>
           </div>
         </div>

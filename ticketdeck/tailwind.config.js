@@ -5,7 +5,11 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'ticketdeck-blue': '#007bff',
+      }
+    },
   },
   plugins: [],
 }
