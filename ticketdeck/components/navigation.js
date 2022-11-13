@@ -12,11 +12,11 @@ export default function Navigation() {
         return(
             <Navbar expand="lg" className={styles.navbar}>
                 <div className="container">
-                <Navbar.Brand href="\">TicketDeck</Navbar.Brand>
+                <Navbar.Brand href="/">TicketDeck</Navbar.Brand>
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav>
-                        <Nav.Link href="\">My tickets</Nav.Link>
-                        {/* <Nav.Link href="#link">My profile</Nav.Link> */}
+                        <Nav.Link href="/">My tickets</Nav.Link>
+                        {/* <Nav.Link href="/ticket/add">Add ticket</Nav.Link> */}
                         <Nav.Link href="/api/auth/signout">Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

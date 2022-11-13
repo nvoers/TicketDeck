@@ -8,6 +8,8 @@ import { PrismaClient} from '@prisma/client';
 import { useQRCode } from 'next-qrcode';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { useSession } from 'next-auth/react'
+import Page403 from "../../components/error/403.js";
 
 const prisma = new PrismaClient();
 
@@ -40,47 +42,57 @@ export default function Ticket({ticket}) {
   let date = new Date(ticket.event.date);
   const { Canvas } = useQRCode();
   const router = new useRouter();
+  const session = useSession();
+  console.log(session.data)
 
-  return (
-    <div>
-      <Head>
-        <title>TicketDeck</title>
-        <meta name="description" content="Store all of your tickets" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Navigation />
-      <div className='container'>
-        <div className='row'>
-            <div className='col-8'>
-            <Card className={styles.card}>
-              <Card.Header className={styles.header}>
-                <h1>{ticket.event.event}</h1>
-              </Card.Header>
-              <Card.Body>
-                <h3>{date.toDateString()}</h3>
-                <h3>{ticket.event.venue}, {ticket.event.city}</h3>
-                <button className={styles.delbtn} onClick={() => deleteTicket(ticket.id, router)}>
-                  <FontAwesomeIcon icon={faTrashCan} width="25" color="var(--secondary-color)" className='mt-3'/>
-                </button>
-              </Card.Body>
-            </Card>
-            </div>
-            <div className={styles.col4}>
-              <Canvas className={styles.qr}
-                text={ticket.code}
-                options={{
-                  type: 'image/jpeg',
-                  quality: 0.3,
-                  level: 'M',
-                  margin: 3,
-                  scale: 4,
-                  width: 300,
-                }}
-              />
-            </div>
+  if(session.data){
+    return (
+      <div>
+        <Head>
+          <title>TicketDeck</title>
+          <meta name="description" content="Store all of your tickets" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+  
+        <Navigation />
+        <div className='container'>
+          <div className='row'>
+              <div className='col-8'>
+              <Card className={styles.card}>
+                <Card.Header className={styles.header}>
+                  <h1>{ticket.event.event}</h1>
+                </Card.Header>
+                <Card.Body>
+                  <h3>{date.toDateString()}</h3>
+                  <h3>{ticket.event.venue}, {ticket.event.city}</h3>
+                  <button className={styles.delbtn} onClick={() => deleteTicket(ticket.id, router)}>
+                    <FontAwesomeIcon icon={faTrashCan} width="25" color="var(--secondary-color)" className='mt-3'/>
+                  </button>
+                </Card.Body>
+              </Card>
+              </div>
+              <div className={styles.col4}>
+                <Canvas className={styles.qr}
+                  text={ticket.code}
+                  options={{
+                    type: 'image/jpeg',
+                    quality: 0.3,
+                    level: 'M',
+                    margin: 3,
+                    scale: 4,
+                    width: 300,
+                  }}
+                />
+              </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+  else{
+    return (
+      <Page403 />
+    );
+  }
+  
 }

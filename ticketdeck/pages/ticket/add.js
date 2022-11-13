@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useSession, signIn, signOut } from "next-auth/react";
+import Page403 from "../../components/error/403.js";
 
 async function saveTicket(ticket, userid) {
   let eventData = {
@@ -44,10 +45,9 @@ export default function addticket(){
     router.push('/');
   }
 
+  if(session.data){
     return (
         <div>
-          {console.log("data")}
-          {console.log(session.data.user.id)}
           <Head>
             <title>TicketDeck</title>
             <meta name="description" content="Store all of your tickets" />
@@ -81,4 +81,9 @@ export default function addticket(){
           </div>
         </div>
       );
+  } else {
+    return (
+      <Page403 />
+    );
+  }
 }
