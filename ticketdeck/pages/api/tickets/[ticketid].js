@@ -6,7 +6,6 @@ export default async (req, res) => {
   if (req.method !== 'DELETE') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
-  console.log(req.query)
 
   const deletedTicket = await prisma.ticket.delete({
     where: {
