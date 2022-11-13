@@ -43,7 +43,6 @@ export default function Ticket({ticket}) {
   const { Canvas } = useQRCode();
   const router = new useRouter();
   const session = useSession();
-  console.log(session.data)
 
   if(session.data){
     return (
