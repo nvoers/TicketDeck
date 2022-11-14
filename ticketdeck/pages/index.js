@@ -59,12 +59,12 @@ export default function Home({ initialTickets }) {
               <h1 className="text-6xl font-bold text-ticketdeck-blue">
                 My tickets
               </h1>
-              <a
+              <Link
                 href="/ticket/add/"
                 className="justify-self-end text-2xl text-ticketdeck-blue"
               >
                 Add ticket +
-              </a>
+              </Link>
             </div>
             <div>
               <Tickets initialTickets={initialTickets} />
@@ -90,7 +90,7 @@ export default function Home({ initialTickets }) {
                 Welcome to TicketDeck
               </h1>
               <button className="w-fit self-center rounded-full bg-white px-4 py-2 text-xl font-bold text-ticketdeck-blue">
-                <a href="/api/auth/signin">Login</a>
+                <Link href="/api/auth/signin">Login</Link>
               </button>
             </div>
           </div>

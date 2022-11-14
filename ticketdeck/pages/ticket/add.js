@@ -31,7 +31,7 @@ async function saveTicket(ticket, userid) {
   return await ticketResponse.json();
 }
 
-export default function addticket() {
+export default function Addticket() {
   const { register, handleSubmit, errors } = useForm();
   let router = new useRouter();
   let session = new useSession();
@@ -103,63 +103,4 @@ export default function addticket() {
   } else {
     return <Page403 />;
   }
-}
-
-{
-  /* <div className="container">
-          <div className="row">
-            <Card className={cardstyles.card}>
-              <Card.Header className={cardstyles.header}>
-                <h1>Add ticket</h1>
-              </Card.Header>
-              <Card.Body>
-                <form
-                  className={formstyles.form}
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <label>Event</label>
-                  <input
-                    type="text"
-                    name="event"
-                    {...register("event")}
-                    className={formstyles.large}
-                  />
-                  <label>Date</label>
-                  <input
-                    type="date"
-                    name="date"
-                    {...register("date")}
-                    className={formstyles.fitted}
-                  />
-                  <label>City</label>
-                  <input
-                    type="text"
-                    name="city"
-                    {...register("city")}
-                    className={formstyles.small}
-                  />
-                  <label>Venue</label>
-                  <input
-                    type="text"
-                    name="venue"
-                    {...register("venue")}
-                    className={formstyles.small}
-                  />
-                  <label>Code</label>
-                  <input
-                    type="text"
-                    name="code"
-                    {...register("code")}
-                    className={formstyles.small}
-                  />
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className={formstyles.submit}
-                  />
-                </form>
-              </Card.Body>
-            </Card>
-          </div>
-        </div> */
 }

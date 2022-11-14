@@ -6,23 +6,23 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:dev/db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model ticket{
-  id String @id @default(cuid())
-  userId Int
-  event event @relation(fields: [eventId], references: [id])
+model ticket {
+  id      String @id @default(cuid())
+  userId  Int
+  event   event  @relation(fields: [eventId], references: [id])
   eventId String
-  code String
+  code    String
 }
 
-model event{
-  id String @id @default(cuid())
-  event String @default("Unknown")
-  date DateTime @default(now())
-  city String @default("Unknown")
-  venue String @default("Unknown")
+model event {
+  id     String   @id @default(cuid())
+  event  String   @default("Unknown")
+  date   DateTime @default(now())
+  city   String   @default("Unknown")
+  venue  String   @default("Unknown")
   ticket ticket[]
 }

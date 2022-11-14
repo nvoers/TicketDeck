@@ -7,11 +7,11 @@ export default function Navigation() {
     return (
       <nav className="bg-white px-2 py-1 dark:bg-gray-900 sm:px-4">
         <div className="container mx-auto flex flex-wrap items-center justify-between border-b-2 py-3">
-          <a href="/" className="flex items-center  no-underline">
+          <Link href="/" className="flex items-center  no-underline">
             <span className="self-center whitespace-nowrap text-xl font-semibold text-ticketdeck-blue no-underline dark:text-white">
               TicketDeck
             </span>
-          </a>
+          </Link>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
@@ -37,13 +37,13 @@ export default function Navigation() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
               <li>
-                <a
+                <Link
                   href="/api/auth/signout"
                   className="block py-2 pr-4 pl-3 text-black no-underline dark:text-white md:p-0"
                   aria-current="page"
                 >
                   Logout
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -54,11 +54,11 @@ export default function Navigation() {
     return (
       <nav className="bg-white px-2 py-1 dark:bg-gray-900 sm:px-4">
         <div className="container mx-auto flex flex-wrap items-center justify-between py-3">
-          <a href="/" className="flex items-center  no-underline">
+          <Link href="/" className="flex items-center  no-underline">
             <span className="self-center whitespace-nowrap text-xl font-semibold text-ticketdeck-blue no-underline dark:text-white">
               TicketDeck
             </span>
-          </a>
+          </Link>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
@@ -84,13 +84,13 @@ export default function Navigation() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium md:dark:bg-gray-900">
               <li>
-                <a
+                <Link
                   href="/api/auth/signin"
                   className="block py-2 pr-4 pl-3 text-black no-underline dark:text-white md:p-0"
                   aria-current="page"
                 >
                   Login
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
