@@ -27,12 +27,9 @@ export async function getServerSideProps(context) {
 }
 
 const deleteTicket = async (ticketid, router) => {
-  const response = await fetch(
-    `http://localhost:3000/api/tickets/${ticketid}`,
-    {
-      method: "DELETE",
-    }
-  );
+  const response = await fetch(`/api/tickets/${ticketid}`, {
+    method: "DELETE",
+  });
   const data = await response.json();
   router.push("/");
 };

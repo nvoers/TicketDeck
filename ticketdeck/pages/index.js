@@ -8,7 +8,7 @@ import Link from "next/link";
 const prisma = new PrismaClient();
 
 export const getServerSideProps = async (context) => {
-  let tickets_request = await fetch("http://localhost:3000/api/getticket", {
+  let tickets_request = await fetch("/api/getticket", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
