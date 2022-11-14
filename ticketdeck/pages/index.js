@@ -3,6 +3,7 @@ import Navigation from "../components/navigation.js";
 import Tickets from "../components/tickets.js";
 import { PrismaClient } from "@prisma/client";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 const prisma = new PrismaClient();
 
