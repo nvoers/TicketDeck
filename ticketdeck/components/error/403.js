@@ -12,8 +12,12 @@ export default function Page403() {
 
       <Navigation />
       <div className="container mx-auto">
-        <h1 className="mb-3 text-6xl font-bold text-ticketdeck-blue">Error</h1>
-        <p>403: Permission denied</p>
+        <div className="flex flex-col items-center">
+          <h1 className="mb-3 text-6xl font-bold text-ticketdeck-blue">
+            Error
+          </h1>
+          <p>403: Permission denied</p>
+        </div>
       </div>
     </div>
   );

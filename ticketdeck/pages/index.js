@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 
 export const getServerSideProps = async (context) => {
   let tickets_request = await fetch(
-    "https://ticketdeck.vercel.app/api/getticket",
+    `http://ticketdeck.vercel.app/api/getticket`,
     {
       method: "GET",
       headers: {
@@ -60,12 +60,12 @@ export default function Home({ initialTickets }) {
         <div className="container mx-auto">
           <div className="p-4">
             <div className="grid grid-cols-2">
-              <h1 className="text-6xl font-bold text-ticketdeck-blue">
+              <h1 className="col-span-2 text-6xl font-bold text-ticketdeck-blue md:col-span-1">
                 My tickets
               </h1>
               <Link
                 href="/ticket/add/"
-                className="justify-self-end text-2xl text-ticketdeck-blue"
+                className="mt-2 text-2xl text-ticketdeck-blue md:mt-0 md:justify-self-end"
               >
                 Add ticket +
               </Link>

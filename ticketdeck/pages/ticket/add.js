@@ -61,7 +61,7 @@ export default function Addticket() {
               type="text"
               name="event"
               {...register("event")}
-              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
             />
             <label>Date</label>
             <input
@@ -75,21 +75,21 @@ export default function Addticket() {
               type="text"
               name="city"
               {...register("city")}
-              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
             />
             <label>Venue</label>
             <input
               type="text"
               name="venue"
               {...register("venue")}
-              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
             />
             <label>Code</label>
             <input
               type="text"
               name="code"
               {...register("code")}
-              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
             />
             <input
               type="submit"

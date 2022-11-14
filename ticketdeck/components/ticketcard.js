@@ -7,7 +7,7 @@ export default function TicketCard({ ticket }) {
   return (
     <Link href={link}>
       <div className="grid grid-cols-5 rounded-lg bg-gray-100 p-4">
-        <div className="flex max-w-fit flex-col justify-self-center text-4xl">
+        <div className="flex max-w-fit flex-col justify-self-center text-lg md:text-4xl">
           <h1 className="w-fit self-center font-bold text-ticketdeck-blue2">
             {date
               .toLocaleString("default", { weekday: "long" })
