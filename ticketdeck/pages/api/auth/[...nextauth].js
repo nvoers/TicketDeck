@@ -1,5 +1,5 @@
-import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
+import NextAuth from "next-auth";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -7,16 +7,16 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      
     }),
     // ...add more providers here
   ],
   callbacks: {
-    async session({session, user, token}){
+    async session({ session, user, token }) {
       session.user.id = parseInt(token.sub);
       return session;
-    }
-  }
-}
+    },
+  },
+  secret: process.env.SECRET,
+};
 
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);
