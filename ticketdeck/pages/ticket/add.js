@@ -1,10 +1,7 @@
-import Navigation from '../../components/navigation.js';
-import Head from 'next/head';
-import cardstyles from '../../styles/Cards.module.css';
-import formstyles from '../../styles/Forms.module.css';
-import Card from 'react-bootstrap/Card';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import Navigation from "../../components/navigation.js";
+import Head from "next/head";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Page403 from "../../components/error/403.js";
 
@@ -20,11 +17,11 @@ async function saveTicket(ticket, userid) {
       create: eventData,
     },
     code: ticket.code,
-    userId: userid
+    userId: userid,
   };
 
-  const ticketResponse = await fetch('/api/ticket', {
-    method: 'POST',
+  const ticketResponse = await fetch("/api/ticket", {
+    method: "POST",
     body: JSON.stringify(ticketData),
   });
 
@@ -34,56 +31,135 @@ async function saveTicket(ticket, userid) {
   return await ticketResponse.json();
 }
 
-export default function addticket(){
-
+export default function addticket() {
   const { register, handleSubmit, errors } = useForm();
   let router = new useRouter();
   let session = new useSession();
-  
-  async function onSubmit(data, e){
+
+  async function onSubmit(data, e) {
     saveTicket(data, session.data.user.id);
-    router.push('/');
+    router.push("/");
   }
 
-  if(session.data){
+  if (session.data) {
     return (
-        <div>
-          <Head>
-            <title>TicketDeck</title>
-            <meta name="description" content="Store all of your tickets" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-    
-          <Navigation />
-          <div className='container'>
-            <div className='row'>
-                <Card className={cardstyles.card}>
-                    <Card.Header className={cardstyles.header}>
-                        <h1>Add ticket</h1>
-                    </Card.Header>
-                    <Card.Body>
-                    <form className={formstyles.form} onSubmit={handleSubmit(onSubmit)}>
-                        <label>Event</label>
-                        <input type="text" name="event" {...register("event")} className={formstyles.large}/>
-                        <label>Date</label>
-                        <input type="date" name="date" {...register("date")} className={formstyles.fitted}/>
-                        <label>City</label>
-                        <input type="text" name="city" {...register("city")} className={formstyles.small}/>
-                        <label>Venue</label>
-                        <input type="text" name="venue" {...register("venue")} className={formstyles.small}/>
-                        <label>Code</label>
-                        <input type="text" name="code" {...register("code")} className={formstyles.small}/>
-                        <input type="submit" value="Submit" className={formstyles.submit}/>
-                    </form>
-                    </Card.Body>
-                </Card>
-            </div>
-          </div>
+      <div>
+        <Head>
+          <title>TicketDeck</title>
+          <meta name="description" content="Store all of your tickets" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <Navigation />
+        <div className="container mx-auto mt-5 flex flex-col place-content-between bg-gray-100 p-3">
+          <h1 className="mb-3 text-6xl font-bold text-ticketdeck-blue">
+            Add ticket
+          </h1>
+          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+            <label>Event</label>
+            <input
+              type="text"
+              name="event"
+              {...register("event")}
+              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+            />
+            <label>Date</label>
+            <input
+              type="date"
+              name="date"
+              {...register("date")}
+              className="border-1 mx-2 mb-2 w-fit rounded-md border-gray-300 p-2"
+            />
+            <label>City</label>
+            <input
+              type="text"
+              name="city"
+              {...register("city")}
+              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+            />
+            <label>Venue</label>
+            <input
+              type="text"
+              name="venue"
+              {...register("venue")}
+              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+            />
+            <label>Code</label>
+            <input
+              type="text"
+              name="code"
+              {...register("code")}
+              className="border-1 mx-2 mb-2 w-1/2 rounded-md border-gray-300 p-2"
+            />
+            <input
+              type="submit"
+              value="Submit"
+              className="mt-2 flex w-fit content-center rounded-full bg-ticketdeck-blue p-2 text-white"
+            />
+          </form>
         </div>
-      );
-  } else {
-    return (
-      <Page403 />
+      </div>
     );
+  } else {
+    return <Page403 />;
   }
+}
+
+{
+  /* <div className="container">
+          <div className="row">
+            <Card className={cardstyles.card}>
+              <Card.Header className={cardstyles.header}>
+                <h1>Add ticket</h1>
+              </Card.Header>
+              <Card.Body>
+                <form
+                  className={formstyles.form}
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <label>Event</label>
+                  <input
+                    type="text"
+                    name="event"
+                    {...register("event")}
+                    className={formstyles.large}
+                  />
+                  <label>Date</label>
+                  <input
+                    type="date"
+                    name="date"
+                    {...register("date")}
+                    className={formstyles.fitted}
+                  />
+                  <label>City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    {...register("city")}
+                    className={formstyles.small}
+                  />
+                  <label>Venue</label>
+                  <input
+                    type="text"
+                    name="venue"
+                    {...register("venue")}
+                    className={formstyles.small}
+                  />
+                  <label>Code</label>
+                  <input
+                    type="text"
+                    name="code"
+                    {...register("code")}
+                    className={formstyles.small}
+                  />
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className={formstyles.submit}
+                  />
+                </form>
+              </Card.Body>
+            </Card>
+          </div>
+        </div> */
 }

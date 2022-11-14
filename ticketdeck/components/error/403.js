@@ -1,24 +1,20 @@
-import Head from 'next/head'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from '../../components/navigation.js'
-import styles from '../../styles/Error.module.css'
+import Head from "next/head";
+import Navigation from "../../components/navigation.js";
 
 export default function Page403() {
-    return (
-        <div>
-        <Head>
-          <title>TicketDeck</title>
-          <meta name="description" content="Store all of your tickets" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-  
-        <Navigation />
-        <div className='container'>
-            <div className='row'>
-                <h1 className={styles.title}>Error</h1>
-                <p>403: Permission denied</p>
-            </div>
-        </div>
-        </div>
-    );
+  return (
+    <div>
+      <Head>
+        <title>TicketDeck</title>
+        <meta name="description" content="Store all of your tickets" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Navigation />
+      <div className="container mx-auto">
+        <h1 className="mb-3 text-6xl font-bold text-ticketdeck-blue">Error</h1>
+        <p>403: Permission denied</p>
+      </div>
+    </div>
+  );
 }
