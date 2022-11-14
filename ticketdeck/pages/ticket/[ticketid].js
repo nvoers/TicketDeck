@@ -52,7 +52,7 @@ export default function Ticket({ ticket }) {
         <Navigation />
         <div className="container mx-auto mt-5 flex place-content-between bg-gray-100 p-3">
           <div>
-            <h1 className="mb-3 text-6xl font-bold text-ticketdeck-blue">
+            <h1 className="mb-3 text-3xl font-bold text-ticketdeck-blue md:text-6xl">
               {ticket.event.event}
             </h1>
             <h2 className="text-2xl">{date.toDateString()}</h2>
@@ -76,7 +76,7 @@ export default function Ticket({ ticket }) {
         </div>
         <div className="container mx-auto">
           <div className="grid grid-cols-2 justify-items-center">
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <Canvas
                 text={ticket.code}
                 options={{
@@ -89,7 +89,9 @@ export default function Ticket({ ticket }) {
                 }}
               />
             </div>
-            <div className="flex items-center">Barcode coming soon!</div>
+            <div className="col-span-2 flex items-center md:col-span-1">
+              <p>Barcode coming soon!</p>
+            </div>
           </div>
         </div>
       </div>
