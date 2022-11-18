@@ -4,20 +4,18 @@ import Tickets from "../components/tickets.js";
 import { PrismaClient } from "@prisma/client";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { server } from "../config";
 
 const prisma = new PrismaClient();
 
 export const getServerSideProps = async (context) => {
-  let tickets_request = await fetch(
-    `http://ticketdeck.vercel.app/api/getticket`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        cookie: context.req.headers.cookie,
-      },
-    }
-  );
+  let tickets_request = await fetch(`${server}/api/getticket`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      cookie: context.req.headers.cookie,
+    },
+  });
 
   let tickets = await tickets_request.json();
   tickets = JSON.parse(JSON.stringify(tickets));
