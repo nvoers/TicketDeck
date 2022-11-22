@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import Page403 from "../../components/error/403.js";
+import Barcode from "react-barcode";
 
 const prisma = new PrismaClient();
 
@@ -89,8 +90,8 @@ export default function Ticket({ ticket }) {
                 }}
               />
             </div>
-            <div className="col-span-2 flex items-center md:col-span-1">
-              <p>Barcode coming soon!</p>
+            <div className="col-span-2 flex max-w-[80%] items-center md:col-span-1">
+              <Barcode value={ticket.code} lineColor="black" />
             </div>
           </div>
         </div>
