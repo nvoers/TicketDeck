@@ -28,6 +28,7 @@ export default function LoginForm() {
         className="my-auto w-[75%] md:w-[30%]"
         onSubmit={formik.handleSubmit}
       >
+        <h1 className="mb-8 text-center text-7xl font-bold">LOGIN</h1>
         <div className="flex flex-col justify-center">
           <input
             type="text"
