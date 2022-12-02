@@ -10,12 +10,9 @@ export default function Login() {
         <meta name="description" content="Store all of your tickets" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Navigation />
-      <div className="absolute w-screen">
-        <div className="flex h-screen justify-center">
-          <RegisterForm />
-        </div>
+      <div className="flex h-screen justify-center">
+        <RegisterForm />
       </div>
     </div>
   );

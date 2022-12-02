@@ -1,32 +1,8 @@
 import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useRouter } from "next/router";
 
-const validate = (values) => {
-  const errors = {};
-  if (!values.username) {
-    errors.username = "This field is required";
-  }
-  if (!values.password) {
-    errors.password = "This field is required";
-  }
-  if (!values.name) {
-    errors.name = "This field is required";
-  }
-  if (!values.rpassword) {
-    errors.rpassword = "This field is required";
-  }
-  if (!values.email) {
-    errors.email = "This field is required";
-  }
-  if (values.password !== values.rpassword) {
-    errors.rpassword = "Passwords do not match";
-  }
-  if (!values.email.includes("@")) {
-    errors.email = "Invalid email";
-  }
-  return errors;
-};
-
-async function addUser(values) {
+async function addUser(values, setError, formik) {
   let userData = {
     email: values.email,
     username: values.username,
@@ -39,13 +15,22 @@ async function addUser(values) {
     body: JSON.stringify(userData),
   });
 
-  if (!userResponse.ok) {
-    throw new Error(userResponse.statusText);
+  const res = await userResponse.json();
+
+  if (userResponse.status === 409) {
+    if (res.message.includes("username")) {
+      setError({ username: "An account with this username already exists" });
+    }
+    if (res.message.includes("email")) {
+      setError({ email: "An account with this email already exists" });
+    }
   }
-  return await userResponse.json();
+  return res;
 }
 
 export default function RegisterForm() {
+  let router = new useRouter();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -54,9 +39,18 @@ export default function RegisterForm() {
       email: "",
       name: "",
     },
-    validate,
-    onSubmit: (values) => {
-      addUser(values);
+    validationSchema: Yup.object({
+      username: Yup.string().required("Required"),
+      password: Yup.string().required("Required"),
+      rpassword: Yup.string()
+        .required("Required")
+        .equals([Yup.ref("password")], "Passwords must match"),
+      email: Yup.string().required("Required"),
+      name: Yup.string().required("Required"),
+    }),
+    onSubmit: (values, { setErrors }) => {
+      addUser(values, setErrors, formik);
+      router.push("/");
     },
   });
   return (

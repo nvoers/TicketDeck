@@ -21,7 +21,6 @@ export const authOptions = {
             username: credentials.username,
           },
         });
-        console.log(credentials.password);
 
         if (user && user.password == credentials.password) {
           // Any object returned will be saved in `user` property of the JWT
