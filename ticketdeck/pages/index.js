@@ -2,7 +2,7 @@ import Head from "next/head";
 import Navigation from "../components/navigation.js";
 import Tickets from "../components/tickets.js";
 import { PrismaClient } from "@prisma/client";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { server } from "../config";
 
@@ -18,7 +18,8 @@ export const getServerSideProps = async (context) => {
   });
 
   let tickets = await tickets_request.json();
-  tickets = JSON.parse(JSON.stringify(tickets));
+  //tickets = JSON.parse(JSON.stringify(tickets));
+  tickets = [];
 
   let events = await prisma.event.findMany();
   events = JSON.parse(JSON.stringify(events));
