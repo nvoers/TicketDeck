@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Page403 from "../../components/error/403.js";
 
-async function saveTicket(ticket, userid) {
+async function saveTicket(ticket, user) {
   let eventData = {
     event: ticket.event,
     date: new Date(ticket.date),
@@ -17,7 +17,8 @@ async function saveTicket(ticket, userid) {
       create: eventData,
     },
     code: ticket.code,
-    userId: userid,
+    user: user,
+    type: ticket.type,
   };
 
   const ticketResponse = await fetch("/api/ticket", {
@@ -37,7 +38,7 @@ export default function Addticket() {
   let session = new useSession();
 
   async function onSubmit(data, e) {
-    saveTicket(data, session.data.user.id);
+    saveTicket(data, session.data.user);
     router.push("/");
   }
 
@@ -91,6 +92,23 @@ export default function Addticket() {
               {...register("code")}
               className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
             />
+            <label>Type</label>
+            <input
+              type="radio"
+              id="qr"
+              name="type"
+              value="QRCODE"
+              {...register("type")}
+            />
+            <label for="qr">QR CODE</label>
+            <input
+              type="radio"
+              id="barcode"
+              name="type"
+              value="BARCODE"
+              {...register("type")}
+            />
+            <label for="barcode">BARCODE</label>
             <input
               type="submit"
               value="Submit"
