@@ -76,23 +76,26 @@ export default function Ticket({ ticket }) {
           </div>
         </div>
         <div className="container mx-auto">
-          <div className="grid grid-cols-2 justify-items-center">
-            <div className="col-span-2 md:col-span-1">
-              <Canvas
-                text={ticket.code}
-                options={{
-                  type: "image/jpeg",
-                  quality: 0.3,
-                  level: "M",
-                  margin: 3,
-                  scale: 4,
-                  width: 300,
-                }}
-              />
-            </div>
-            <div className="col-span-2 flex max-w-[80%] items-center md:col-span-1">
-              <Barcode value={ticket.code} lineColor="black" />
-            </div>
+          <div className="grid justify-items-center">
+            {ticket.type == "QRCODE" ? (
+              <div>
+                <Canvas
+                  text={ticket.code}
+                  options={{
+                    type: "image/jpeg",
+                    quality: 0.3,
+                    level: "M",
+                    margin: 3,
+                    scale: 4,
+                    width: 300,
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="flex max-w-[80%] items-center pt-5">
+                <Barcode value={ticket.code} lineColor="black" />
+              </div>
+            )}
           </div>
         </div>
       </div>

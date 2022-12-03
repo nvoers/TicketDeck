@@ -26,6 +26,7 @@ model ticket {
   event   event  @relation(fields: [eventId], references: [id])
   eventId String
   code    String
+  type    String
 }
 
 model event {
