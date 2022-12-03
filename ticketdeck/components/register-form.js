@@ -25,7 +25,7 @@ async function addUser(values, setError, formik) {
       setError({ email: "An account with this email already exists" });
     }
   }
-  return res;
+  return userResponse.status;
 }
 
 export default function RegisterForm() {
@@ -49,8 +49,12 @@ export default function RegisterForm() {
       name: Yup.string().required("Required"),
     }),
     onSubmit: (values, { setErrors }) => {
-      addUser(values, setErrors, formik);
-      router.push("/");
+      addUser(values, setErrors, formik).then(function (result) {
+        console.log(result);
+        if (result === 200) {
+          router.push("/");
+        }
+      });
     },
   });
   return (
