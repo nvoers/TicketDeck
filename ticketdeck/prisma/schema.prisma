@@ -11,17 +11,15 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(cuid())
-  email    String   @unique
-  username String   @unique
+  id       String  @id @default(cuid())
+  email    String  @unique
+  username String  @unique
   password String
   name     String?
-  tickets  ticket[]
 }
 
 model ticket {
   id      String @id @default(cuid())
-  user    User   @relation(fields: [userId], references: [id])
   userId  String
   event   event  @relation(fields: [eventId], references: [id])
   eventId String

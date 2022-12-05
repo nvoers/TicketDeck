@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Page403 from "../../components/error/403.js";
 
-async function saveTicket(ticket, user) {
+async function saveTicket(ticket) {
   let eventData = {
     event: ticket.event,
     date: new Date(ticket.date),
@@ -17,7 +17,6 @@ async function saveTicket(ticket, user) {
       create: eventData,
     },
     code: ticket.code,
-    user: user,
     type: ticket.type,
   };
 
@@ -38,7 +37,7 @@ export default function Addticket() {
   let session = new useSession();
 
   async function onSubmit(data, e) {
-    saveTicket(data, session.data.user);
+    saveTicket(data);
     router.push("/");
   }
 

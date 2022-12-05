@@ -11,21 +11,13 @@ export default async (req, res) => {
   }
   const ticketData = JSON.parse(req.body);
 
-  const user = await prisma.user.findUnique({
-    where: { id: ticketData.user.id },
-  });
-
   const session = await getSession({ req });
 
   const savedTicket = await prisma.ticket.create({
     data: {
       event: ticketData.event,
       code: ticketData.code,
-      user: {
-        connect: {
-          id: ticketData.user.id,
-        },
-      },
+      userId: session.user.id,
       type: ticketData.type,
     },
   });
