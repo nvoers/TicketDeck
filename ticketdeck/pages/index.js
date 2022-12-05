@@ -18,6 +18,7 @@ export const getServerSideProps = async (context) => {
   });
 
   let tickets = await tickets_request.json();
+  console.log(tickets);
   tickets = JSON.parse(JSON.stringify(tickets));
 
   let events = await prisma.event.findMany();
