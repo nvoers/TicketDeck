@@ -73,7 +73,7 @@ export default function Home({ todaytickets, othertickets }) {
           <div className="p-4">
             <div className="grid grid-cols-2">
               <h1 className="col-span-2 text-6xl font-bold text-ticketdeck-blue md:col-span-1">
-                Today's events
+                Todays events
               </h1>
               <Link
                 href="/ticket/add/"
