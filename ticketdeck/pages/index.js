@@ -24,6 +24,8 @@ export const getServerSideProps = async (context) => {
   events = JSON.parse(JSON.stringify(events));
 
   let sortedTickets = [];
+  let todaytickets = [];
+  let othertickets = [];
 
   if (tickets.length > 0) {
     tickets = tickets.map((ticket) => {
@@ -31,18 +33,30 @@ export const getServerSideProps = async (context) => {
       return ticket;
     });
     sortedTickets = tickets.sort((a, b) => {
-      return Date.parse(b.event.date) - Date.parse(a.event.date);
+      return Date.parse(a.event.date) - Date.parse(b.event.date);
     });
   }
 
+  todaytickets = sortedTickets.filter((ticket) => {
+    let date = new Date(ticket.event.date);
+    let today = new Date();
+    return date.getDate() == today.getDate();
+  });
+  othertickets = sortedTickets.filter((ticket) => {
+    let date = new Date(ticket.event.date);
+    let today = new Date();
+    return date.getDate() > today.getDate();
+  });
+
   return {
     props: {
-      initialTickets: sortedTickets,
+      todaytickets: todaytickets,
+      othertickets: othertickets,
     },
   };
 };
 
-export default function Home({ initialTickets }) {
+export default function Home({ todaytickets, othertickets }) {
   const { data: session, status } = useSession();
 
   if (session) {
@@ -59,7 +73,7 @@ export default function Home({ initialTickets }) {
           <div className="p-4">
             <div className="grid grid-cols-2">
               <h1 className="col-span-2 text-6xl font-bold text-ticketdeck-blue md:col-span-1">
-                My tickets
+                Todays events
               </h1>
               <Link
                 href="/ticket/add/"
@@ -68,9 +82,35 @@ export default function Home({ initialTickets }) {
                 Add ticket +
               </Link>
             </div>
-            <div>
-              <Tickets initialTickets={initialTickets} />
+            {todaytickets.length > 0 ? (
+              <div>
+                <Tickets initialTickets={todaytickets} />
+              </div>
+            ) : (
+              <p>No tickets today</p>
+            )}
+          </div>
+        </div>
+        <div className="container mx-auto">
+          <div className="p-4">
+            <div className="grid grid-cols-2">
+              <h1 className="col-span-2 text-6xl font-bold text-ticketdeck-blue md:col-span-1">
+                Upcoming events
+              </h1>
+              <Link
+                href="/ticket/add/"
+                className="mt-2 text-2xl text-ticketdeck-blue md:mt-0 md:justify-self-end"
+              >
+                Add ticket +
+              </Link>
             </div>
+            {othertickets.length > 0 ? (
+              <div>
+                <Tickets initialTickets={othertickets} />
+              </div>
+            ) : (
+              <p>No upcoming tickets</p>
+            )}
           </div>
         </div>
       </div>
