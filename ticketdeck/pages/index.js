@@ -1,10 +1,14 @@
 import Head from "next/head";
 import Navigation from "../components/navigation.js";
+import Footer from "../components/footer.js";
 import Tickets from "../components/tickets.js";
 import { PrismaClient } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { server } from "../config";
+import Image from "next/image";
+import TicketCard from "../components/ticketcard.js";
+import { SystemZone } from "luxon";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +27,12 @@ export const getServerSideProps = async (context) => {
   let events = await prisma.event.findMany();
   events = JSON.parse(JSON.stringify(events));
 
+  let numbertickets = await prisma.ticket.count();
+  numbertickets = JSON.parse(JSON.stringify(numbertickets));
+
+  let numberevents = await prisma.event.count();
+  numberevents = JSON.parse(JSON.stringify(numberevents));
+
   let sortedTickets = [];
   let todaytickets = [];
   let othertickets = [];
@@ -40,26 +50,102 @@ export const getServerSideProps = async (context) => {
   todaytickets = sortedTickets.filter((ticket) => {
     let date = new Date(ticket.event.date);
     let today = new Date();
-    return date.getDate() == today.getDate();
+    let day = date.getDate() - today.getDate();
+    let month = date.getMonth() - today.getMonth();
+    let year = date.getFullYear() - today.getFullYear();
+    return day == 0 && month == 0 && year == 0;
   });
   othertickets = sortedTickets.filter((ticket) => {
     let date = new Date(ticket.event.date);
     let today = new Date();
-    return date.getDate() > today.getDate();
+    let day = date.getDate() - today.getDate();
+    let month = date.getMonth() - today.getMonth();
+    let year = date.getFullYear() - today.getFullYear();
+    return day && month && year;
   });
 
   return {
     props: {
       todaytickets: todaytickets,
-      othertickets: othertickets,
+      othertickets: othertickets.slice(0, 3),
+      numbertickets: numbertickets,
+      numberevents: numberevents,
     },
   };
 };
 
-export default function Home({ todaytickets, othertickets }) {
+export default function Home({
+  todaytickets,
+  othertickets,
+  numbertickets,
+  numberevents,
+}) {
   const { data: session, status } = useSession();
 
   if (session) {
+    return (
+      <div className="h-screen bg-gradient-to-r from-ticketdeck-blue to-ticketdeck-purple">
+        <Head>
+          <title>TicketDeck</title>
+          <meta name="description" content="Store all of your tickets" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <Navigation />
+        <div className="container mx-auto grid h-fit grid-cols-1 self-center pb-4 md:grid-cols-2 md:bg-white">
+          <div className="p-5">
+            <div className="rounded-md border-2 border-ticketdeck-blue bg-white p-5">
+              <h1 className="text-5xl font-bold text-ticketdeck-purple">
+                Today&apos;s events
+              </h1>
+              {todaytickets.length > 0 ? (
+                todaytickets.map((ticket) => (
+                  <TicketCard key={ticket.id} ticket={ticket} />
+                ))
+              ) : (
+                <p className="mt-3 text-2xl font-bold">
+                  You have no events today
+                </p>
+              )}
+            </div>
+            {/* today tickets */}
+            <div className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
+              <Link href="/ticket/add" className="text-white">
+                ADD TICKET
+              </Link>
+            </div>
+            {/* add button */}
+          </div>
+          <div className="p-5">
+            <div className="rounded-md border-2 border-ticketdeck-blue bg-white p-5">
+              <h1 className="text-5xl font-bold text-ticketdeck-purple">
+                Upcoming events
+              </h1>
+              {othertickets.length > 0 ? (
+                othertickets.map((ticket) => (
+                  <TicketCard key={ticket.id} ticket={ticket} />
+                ))
+              ) : (
+                <p className="mt-3 text-2xl font-bold">
+                  You have no upcoming events
+                </p>
+              )}
+            </div>
+            {/* other tickets */}
+            <div className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
+              <Link href="/ticket/all" className="text-white">
+                VIEW ALL EVENTS
+              </Link>
+            </div>
+            {/* all button */}
+          </div>
+        </div>
+        <div className="md:fixed md:bottom-0 md:w-full">
+          <Footer />
+        </div>
+      </div>
+    );
+  } else {
     return (
       <div>
         <Head>
@@ -68,75 +154,64 @@ export default function Home({ todaytickets, othertickets }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <Navigation />
-        <div className="container mx-auto">
-          <div className="p-4">
-            <div className="grid grid-cols-2">
-              <h1 className="col-span-2 text-6xl font-bold text-ticketdeck-blue md:col-span-1">
-                Todays events
-              </h1>
-              <Link
-                href="/ticket/add/"
-                className="mt-2 text-2xl text-ticketdeck-blue md:mt-0 md:justify-self-end"
-              >
-                Add ticket +
-              </Link>
-            </div>
-            {todaytickets.length > 0 ? (
+        <div className="bg-gradient-to-r from-ticketdeck-blue to-ticketdeck-purple">
+          <Navigation />
+          <div className="container mx-auto flex justify-center">
+            <div className="flex w-[80%] flex-col pt-20 pb-32 md:w-[30%]">
               <div>
-                <Tickets initialTickets={todaytickets} />
+                <h1 className="text-center text-5xl font-bold text-white">
+                  All your tickets in one place
+                </h1>
               </div>
-            ) : (
-              <p>No tickets today</p>
-            )}
-          </div>
-        </div>
-        <div className="container mx-auto">
-          <div className="p-4">
-            <div className="grid grid-cols-2">
-              <h1 className="col-span-2 text-6xl font-bold text-ticketdeck-blue md:col-span-1">
-                Upcoming events
-              </h1>
-              <Link
-                href="/ticket/add/"
-                className="mt-2 text-2xl text-ticketdeck-blue md:mt-0 md:justify-self-end"
-              >
-                Add ticket +
-              </Link>
-            </div>
-            {othertickets.length > 0 ? (
-              <div>
-                <Tickets initialTickets={othertickets} />
+              <div className="flex flex-row justify-around pt-5">
+                <div className="w-[9rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
+                  <Link href="/api/auth/signin" className="text-white">
+                    SIGN IN
+                  </Link>
+                </div>
+                {/* <div className="w-[9rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
+                  <Link href="/register" className="text-white">
+                    REGISTER
+                  </Link>
+                </div> */}
               </div>
-            ) : (
-              <p>No upcoming tickets</p>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="h-screen bg-ticketdeck-blue">
-        <Head>
-          <title>TicketDeck</title>
-          <meta name="description" content="Store all of your tickets" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
-        <Navigation />
-        <div className="align-middle">
-          <div className="container mx-auto">
-            <div className="flex flex-col justify-center">
-              <h1 className="pt-40 pb-10 text-center text-4xl font-bold text-white">
-                Welcome to TicketDeck
-              </h1>
-              <button className="w-fit self-center rounded-full bg-white px-4 py-2 text-xl font-bold text-ticketdeck-blue">
-                <Link href="/api/auth/signin">Login</Link>
-              </button>
             </div>
           </div>
+          <div className="flex justify-center bg-white py-16">
+            <div className="mx-8 flex h-[8rem] w-[15rem] justify-center border-2 border-ticketdeck-purple text-center">
+              <h1 className="h-fit self-center text-3xl font-bold">
+                {numberevents}
+                <br />
+                EVENTS
+              </h1>
+            </div>
+            <div className="mx-8 flex h-[8rem] w-[15rem] justify-center border-2 border-ticketdeck-purple text-center">
+              <h1 className="h-fit self-center text-3xl font-bold">
+                {numbertickets}
+                <br />
+                TICKETS
+              </h1>
+            </div>
+            {/* <div className="mx-8 flex h-[8rem] w-[15rem] justify-center border-2 border-ticketdeck-purple text-center">
+              <h1 className="h-fit self-center text-3xl font-bold">
+                60
+                <br />
+                USERS
+              </h1>
+            </div> */}
+          </div>
+          <div className="mx-auto w-[70%] py-32 md:w-[65%]">
+            <h1 className="mb-8 text-center text-3xl font-bold text-white">
+              Store all of your tickets safely
+            </h1>
+            <h2 className="text-center text-2xl text-white">
+              TicketDeck provides a safe place to keep all of your concert and
+              festival tickets. No more loose PDF files all over your email and
+              phone.
+            </h2>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }

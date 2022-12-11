@@ -5,26 +5,11 @@ export default function TicketCard({ ticket }) {
   let link = `/ticket/${ticket.id}`;
 
   return (
-    <Link href={link}>
-      <div className="mb-3 grid grid-cols-5 rounded-lg bg-gray-100 p-4">
-        <div className="flex max-w-fit flex-col justify-self-center text-lg md:text-4xl">
-          <h1 className="w-fit self-center font-bold text-ticketdeck-blue2">
-            {date
-              .toLocaleString("default", { weekday: "long" })
-              .substring(0, 3)}
-          </h1>
-          <h2 className="w-fit self-center font-bold text-ticketdeck-blue2">
-            {date.getDate()}{" "}
-            {date.toLocaleString("default", { month: "short" })}
-          </h2>
-        </div>
-        <div className="col-span-4 self-center text-xl">
-          <h2>{ticket.event.event}</h2>
-          <p>
-            {ticket.event.venue}, {ticket.event.city}
-          </p>
-        </div>
-      </div>
-    </Link>
+    <div className="mt-3 flex items-center justify-between">
+      <h2 className="text-2xl font-bold">{ticket.event.event}</h2>
+      <Link href={link}>
+        <h3 className="text-xl">INFO</h3>
+      </Link>
+    </div>
   );
 }
