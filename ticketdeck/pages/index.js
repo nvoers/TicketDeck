@@ -110,9 +110,9 @@ export default function Home({
             </div>
             {/* today tickets */}
             <div className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
-              <a href="/ticket/add" className="text-white">
+              <Link href="/ticket/add" className="text-white">
                 ADD TICKET
-              </a>
+              </Link>
             </div>
             {/* add button */}
           </div>
@@ -133,9 +133,9 @@ export default function Home({
             </div>
             {/* other tickets */}
             <div className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
-              <a href="/ticket/all" className="text-white">
+              <Link href="/ticket/all" className="text-white">
                 VIEW ALL EVENTS
-              </a>
+              </Link>
             </div>
             {/* all button */}
           </div>
@@ -165,12 +165,14 @@ export default function Home({
               </div>
               <div className="flex flex-row justify-around pt-5">
                 <div className="w-[9rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
-                  <a href="/api/auth/signin" className="text-white">
+                  <Link href="/api/auth/signin" className="text-white">
                     SIGN IN
-                  </a>
+                  </Link>
                 </div>
-                {/* <div className="w-[9rem] rounded-full bg-white py-2 text-center">
-                  <a href="/register">REGISTER</a>
+                {/* <div className="w-[9rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
+                  <Link href="/register" className="text-white">
+                    REGISTER
+                  </Link>
                 </div> */}
               </div>
             </div>

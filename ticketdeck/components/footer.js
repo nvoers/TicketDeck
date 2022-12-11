@@ -13,23 +13,23 @@ export default function Footer() {
             <h1 className="mb-1 text-4xl font-bold">MENU</h1>
             <ul className="text-2xl">
               <li>
-                <a href="/api/auth/signin">Register</a>
+                <Link href="/api/auth/signin">Register</Link>
               </li>
               <li>
-                <a href="/api/auth/signin">Sign in</a>
+                <Link href="/api/auth/signin">Sign in</Link>
               </li>
             </ul>
           </div>
           <div className="flex flex-col items-center md:items-start">
             <h1 className="mb-1 text-4xl font-bold">CONTACT</h1>
-            <a className="text-2xl">info@nickvanoers.nl</a>
+            <p className="text-2xl">info@nickvanoers.nl</p>
           </div>
         </div>
       </div>
       <div className="flex justify-center bg-gray-100 py-3">
-        <a href="https//nickvanoers.nl" className="text-sm md:text-base">
+        <Link href="https://nickvanoers.nl" className="text-sm md:text-base">
           Copyright TicketDeck 2022 | Design by Nick van Oers
-        </a>
+        </Link>
       </div>
     </div>
   );

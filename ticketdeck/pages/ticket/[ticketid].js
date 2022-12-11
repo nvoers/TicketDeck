@@ -95,9 +95,12 @@ export default function Ticket({ ticket }) {
               )}
             </div>
             <div className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-red-800 to-red-600 py-2 text-center drop-shadow-lg">
-              <a href="/ticket/add" className="text-white">
+              <button
+                onClick={() => deleteTicket(ticket.id, router)}
+                className="text-white"
+              >
                 DELETE TICKET
-              </a>
+              </button>
             </div>
             {/* add button */}
           </div>
