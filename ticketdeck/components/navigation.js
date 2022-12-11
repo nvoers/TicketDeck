@@ -10,7 +10,7 @@ export default function Navigation() {
         <nav className="bg-gradient-to-r from-ticketdeck-blue to-ticketdeck-purple px-2 py-1 sm:px-4">
           <div className="container mx-auto flex flex-wrap items-center justify-between py-3">
             <Link href="/" className="flex items-center no-underline">
-              <span className="self-center whitespace-nowrap text-xl font-semibold text-white no-underline">
+              <span className="ml-2 self-center whitespace-nowrap text-xl font-semibold text-white no-underline md:ml-0">
                 TicketDeck
               </span>
             </Link>
@@ -22,7 +22,7 @@ export default function Navigation() {
                     className="block py-2 pr-4 pl-3 text-white no-underline md:p-0"
                     aria-current="page"
                   >
-                    Logout
+                    Sign out
                   </Link>
                 </li>
               </ul>
@@ -49,7 +49,7 @@ export default function Navigation() {
                     className="block py-2 pr-4 pl-3 text-white no-underline md:p-0"
                     aria-current="page"
                   >
-                    Login
+                    Sign in
                   </Link>
                 </li>
                 {/* <li>

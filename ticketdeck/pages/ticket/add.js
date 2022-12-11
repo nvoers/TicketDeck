@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Page403 from "../../components/error/403.js";
+import Footer from "../../components/footer.js";
 
 async function saveTicket(ticket) {
   let eventData = {
@@ -43,7 +44,7 @@ export default function Addticket() {
 
   if (session.data) {
     return (
-      <div>
+      <div className="h-screen bg-gradient-to-r from-ticketdeck-blue to-ticketdeck-purple">
         <Head>
           <title>TicketDeck</title>
           <meta name="description" content="Store all of your tickets" />
@@ -51,70 +52,83 @@ export default function Addticket() {
         </Head>
 
         <Navigation />
-        <div className="container mx-auto mt-5 flex flex-col place-content-between bg-gray-100 p-3">
-          <h1 className="mb-3 text-6xl font-bold text-ticketdeck-blue">
-            Add ticket
+        <div className="container mx-auto mt-5 flex flex-col items-center py-20">
+          <h1 className="mb-12 w-fit text-8xl font-bold text-white">
+            ADD TICKET
           </h1>
-          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-            <label>Event</label>
+          <form
+            className="flex w-[45%] flex-col items-center"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <input
               type="text"
               name="event"
+              placeholder="EVENT"
               {...register("event")}
-              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
+              className="border-1 mb-5 w-full rounded-md border-gray-300 p-2 text-center"
             />
-            <label>Date</label>
             <input
               type="date"
               name="date"
+              placeholder="DATE"
               {...register("date")}
-              className="border-1 mx-2 mb-2 w-fit rounded-md border-gray-300 p-2"
+              className="border-1 mb-5 rounded-md border-gray-300 p-2 text-center"
             />
-            <label>City</label>
             <input
               type="text"
               name="city"
+              placeholder="CITY"
               {...register("city")}
-              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
+              className="border-1 mb-5 w-full rounded-md border-gray-300 p-2 text-center"
             />
-            <label>Venue</label>
             <input
               type="text"
               name="venue"
+              placeholder="VENUE"
               {...register("venue")}
-              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
+              className="border-1 mb-5 w-full rounded-md border-gray-300 p-2 text-center"
             />
-            <label>Code</label>
             <input
               type="text"
               name="code"
+              placeholder="CODE"
               {...register("code")}
-              className="border-1 mx-2 mb-2 rounded-md border-gray-300 p-2 md:w-1/2"
+              className="border-1 mb-5 w-full rounded-md border-gray-300 p-2 text-center"
             />
-            <label>Type</label>
-            <input
-              type="radio"
-              id="qr"
-              name="type"
-              value="QRCODE"
-              {...register("type")}
-            />
-            <label for="qr">QR CODE</label>
-            <input
-              type="radio"
-              id="barcode"
-              name="type"
-              value="BARCODE"
-              {...register("type")}
-            />
-            <label for="barcode">BARCODE</label>
+            <div className="mb-5 flex w-full items-center justify-around">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="qr"
+                  name="type"
+                  value="QRCODE"
+                  {...register("type")}
+                />
+                <label for="qr" className="ml-2 text-white">
+                  QR CODE
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="barcode"
+                  name="type"
+                  value="BARCODE"
+                  {...register("type")}
+                />
+                <label for="barcode" className="ml-2 text-white">
+                  BARCODE
+                </label>
+              </div>
+            </div>
             <input
               type="submit"
-              value="Submit"
-              className="mt-2 flex w-fit content-center rounded-full bg-ticketdeck-blue p-2 text-white"
+              value="ADD TICKET"
+              className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center text-white drop-shadow-lg"
             />
           </form>
         </div>
+        <Footer />
       </div>
     );
   } else {

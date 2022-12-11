@@ -92,9 +92,9 @@ export default function Home({
         </Head>
 
         <Navigation />
-        <div className="container mx-auto grid h-fit grid-cols-2 self-center bg-white">
+        <div className="container mx-auto grid h-fit grid-cols-1 self-center pb-4 md:grid-cols-2 md:bg-white">
           <div className="p-5">
-            <div className="rounded-md border-2 border-ticketdeck-blue p-5">
+            <div className="rounded-md border-2 border-ticketdeck-blue bg-white p-5">
               <h1 className="text-5xl font-bold text-ticketdeck-purple">
                 Today&apos;s events
               </h1>
@@ -117,7 +117,7 @@ export default function Home({
             {/* add button */}
           </div>
           <div className="p-5">
-            <div className="rounded-md border-2 border-ticketdeck-blue p-5">
+            <div className="rounded-md border-2 border-ticketdeck-blue bg-white p-5">
               <h1 className="text-5xl font-bold text-ticketdeck-purple">
                 Upcoming events
               </h1>
@@ -140,7 +140,7 @@ export default function Home({
             {/* all button */}
           </div>
         </div>
-        <div className="fixed bottom-0 w-full">
+        <div className="md:fixed md:bottom-0 md:w-full">
           <Footer />
         </div>
       </div>
@@ -157,7 +157,7 @@ export default function Home({
         <div className="bg-gradient-to-r from-ticketdeck-blue to-ticketdeck-purple">
           <Navigation />
           <div className="container mx-auto flex justify-center">
-            <div className="flex w-[30%] flex-col pt-20 pb-32">
+            <div className="flex w-[80%] flex-col pt-20 pb-32 md:w-[30%]">
               <div>
                 <h1 className="text-center text-5xl font-bold text-white">
                   All your tickets in one place
@@ -166,7 +166,7 @@ export default function Home({
               <div className="flex flex-row justify-around pt-5">
                 <div className="w-[9rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
                   <a href="/api/auth/signin" className="text-white">
-                    LOGIN
+                    SIGN IN
                   </a>
                 </div>
                 {/* <div className="w-[9rem] rounded-full bg-white py-2 text-center">
@@ -198,7 +198,7 @@ export default function Home({
               </h1>
             </div> */}
           </div>
-          <div className="mx-auto w-[65%] py-32">
+          <div className="mx-auto w-[70%] py-32 md:w-[65%]">
             <h1 className="mb-8 text-center text-3xl font-bold text-white">
               Store all of your tickets safely
             </h1>

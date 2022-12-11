@@ -59,9 +59,9 @@ export default function Ticket({ ticket }) {
         </Head>
 
         <Navigation />
-        <div className="container mx-auto mb-10 grid h-fit self-center bg-white">
+        <div className="container mx-auto mb-10 grid h-fit self-center md:bg-white">
           <div className="p-5">
-            <div className="rounded-md border-2 border-ticketdeck-blue p-5">
+            <div className="rounded-md border-2 border-ticketdeck-blue bg-white p-5">
               <h1 className="text-5xl font-bold text-ticketdeck-purple">
                 {ticket.event.event}
               </h1>
@@ -75,7 +75,7 @@ export default function Ticket({ ticket }) {
             {/* event info */}
             <div className="grid justify-items-center">
               {ticket.type == "QRCODE" ? (
-                <div>
+                <div className="mt-5 md:mt-0">
                   <Canvas
                     text={ticket.code}
                     options={{
