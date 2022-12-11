@@ -18,8 +18,6 @@ export default function Footer() {
               <li>
                 <a href="/api/auth/signin">Login</a>
               </li>
-              <li>Tickets</li>
-              <li>My profile</li>
             </ul>
           </div>
           <div className="flex-col">

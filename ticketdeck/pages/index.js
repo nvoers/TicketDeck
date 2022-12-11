@@ -96,7 +96,7 @@ export default function Home({
           <div className="p-5">
             <div className="rounded-md border-2 border-ticketdeck-blue p-5">
               <h1 className="text-5xl font-bold text-ticketdeck-purple">
-                Today's events
+                Today&apos;s events
               </h1>
               {todaytickets.length > 0 ? (
                 todaytickets.map((ticket) => (
@@ -133,7 +133,7 @@ export default function Home({
             </div>
             {/* other tickets */}
             <div className="mx-auto mt-5 w-[20rem] rounded-full bg-gradient-to-r from-blue-300 to-teal-200 py-2 text-center drop-shadow-lg">
-              <a href="/ticket/add" className="text-white">
+              <a href="/ticket/all" className="text-white">
                 VIEW ALL EVENTS
               </a>
             </div>
