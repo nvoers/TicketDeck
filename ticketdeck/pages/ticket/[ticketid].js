@@ -6,7 +6,7 @@ import { useQRCode } from "next-qrcode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
-import Page403 from "../../components/error/403.js";
+import Page403 from "../403.js";
 import Barcode from "react-barcode";
 import Footer from "../../components/footer.js";
 

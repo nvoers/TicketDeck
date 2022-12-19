@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
-import Page403 from "../../components/error/403.js";
+import Page403 from "../403.js";
 import Footer from "../../components/footer.js";
 
 async function saveTicket(ticket) {
