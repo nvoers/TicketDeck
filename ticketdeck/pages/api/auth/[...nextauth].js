@@ -3,6 +3,8 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Auth0Provider from "next-auth/providers/auth0";
 import { PrismaClient } from "@prisma/client";
+import { renderToHTML } from "next/dist/server/render";
+import { redirect } from "next/dist/server/api-utils";
 
 const prisma = new PrismaClient();
 
@@ -48,6 +50,9 @@ export const authOptions = {
     async session({ session, user, token }) {
       session.user.id = token.sub;
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      return "/";
     },
   },
   secret: process.env.SECRET,
