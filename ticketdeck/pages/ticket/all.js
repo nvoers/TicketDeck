@@ -102,7 +102,10 @@ export default function All({ upcomingtickets, pasttickets, numbertickets }) {
           </h1>
           {upcomingtickets.length > 0 ? (
             upcomingtickets.map((ticket) => (
-              <div className="mt-5 rounded-md border-2 border-ticketdeck-blue bg-white p-5">
+              <div
+                className="mt-5 rounded-md border-2 border-ticketdeck-blue bg-white p-5"
+                key={ticket.id}
+              >
                 <h1 className="text-5xl font-bold text-ticketdeck-purple">
                   {ticket.event.event}
                 </h1>
@@ -127,7 +130,10 @@ export default function All({ upcomingtickets, pasttickets, numbertickets }) {
           </h1>
           {pasttickets.length > 0 ? (
             pasttickets.map((ticket) => (
-              <div className="mt-5 rounded-md border-2 border-ticketdeck-blue bg-white p-5">
+              <div
+                className="mt-5 rounded-md border-2 border-ticketdeck-blue bg-white p-5"
+                key={ticket.id}
+              >
                 <h1 className="text-5xl font-bold text-ticketdeck-purple">
                   {ticket.event.event}
                 </h1>
