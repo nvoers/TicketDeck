@@ -1,14 +1,11 @@
 import Head from "next/head";
 import Navigation from "../components/navigation.js";
 import Footer from "../components/footer.js";
-import Tickets from "../components/tickets.js";
 import { PrismaClient } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { server } from "../config";
-import Image from "next/image";
 import TicketCard from "../components/ticketcard.js";
-import { SystemZone } from "luxon";
 
 const prisma = new PrismaClient();
 
@@ -61,12 +58,20 @@ export const getServerSideProps = async (context) => {
     let day = date.getDate() - today.getDate();
     let month = date.getMonth() - today.getMonth();
     let year = date.getFullYear() - today.getFullYear();
-    return day && month && year;
+    if (year > 0) {
+      return true;
+    } else if (year == 0 && month > 0) {
+      return true;
+    } else if (year == 0 && month == 0 && day > 0) {
+      return true;
+    } else {
+      return false;
+    }
   });
 
   return {
     props: {
-      todaytickets: todaytickets,
+      todaytickets: todaytickets.slice(0, 3),
       othertickets: othertickets.slice(0, 3),
       numbertickets: numbertickets,
       numberevents: numberevents,
